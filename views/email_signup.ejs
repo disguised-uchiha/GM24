@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css links  -->
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/css/email_login.css">
+</head>
+
+<body>
+    <main class="d-flex flex-column justify-content-end align-items-center">
+        <ul class="w-50">
+            <li class="d-block mb-3 p-0">
+                <form action="/registration/signup_processing" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <input type="text" class="form-control mb-3" name="name" placeholder="Your Name">
+                    <input type="email" class="form-control mb-3" name="email" placeholder="Enter your Email">
+                    <input type="password" class="form-control mb-3" name="pwd" placeholder="Enter your password">
+                    <input type="submit" class="btn btn-warning w-100" value="SignUp">
+                </form>
+            </li>
+            <li class="btn btn-danger d-block mb-3">Forget Password</li>
+            <li class="btn btn-danger d-block mb-3"><a href="/registration/email_login">Login</a></li>
+        </ul>
+    </main>
+</body>
+
+</html>
