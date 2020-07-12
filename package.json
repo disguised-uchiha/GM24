@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "NODE_ENV=production MONGODB_PWD=Password123 JWT_KEY=jwtpassword SESSION_SECRET=Session@gm24 SENDGRID_API_KEY=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 node app.js",
+    "start-server": "node app.js",
+    "start:dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,7 @@
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.0",
+    "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^2.3.3",
     "csurf": "^1.11.0",

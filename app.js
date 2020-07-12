@@ -1,12 +1,15 @@
 require('dotenv').config({ path: __dirname + '/.env' });
 
 const express = require('express');
+
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const helmet = require('helmet');
+const compression = require('compression');
 
 // Routes
 const reg_routes = require('./routes/registration_routes');
@@ -28,7 +31,10 @@ const store = new MongoDBStore({
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+
 // All request must include this
+app.use(helmet());
+app.use(compression());
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 // Setup sessions and store them into your database using MongoDBStore
@@ -38,8 +44,10 @@ app.use(session({
     saveUninitialized: false,
     store: store
 }));
+
 app.use(csrf());
 app.use(flash());
+
 // Routing requests
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken(),
