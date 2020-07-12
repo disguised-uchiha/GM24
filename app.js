@@ -69,6 +69,6 @@ mongoose.set('useCreateIndex', true);
 // Connecting to MongoDB using mongoose
 mongoose
     .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(result => app.listen(3000, () => console.log('connected to 3000'))
+    .then(result => app.listen(process.env.PORT || 3000, () => console.log('connected to 3000'))
     )
     .catch(err => console.log(err));
