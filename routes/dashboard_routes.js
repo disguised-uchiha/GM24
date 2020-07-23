@@ -31,6 +31,9 @@ router.post('/dashboard/save_task', (req, res, next) => {
     const user = req.session.user;
     // Destructuring the data into variables with same name as that defined in schema
     let { goal_type: goalType, task_name: goalName, purpose: goalPurpose, select_icon: goalIcon, times_per_day: goalRepeatNo } = req.body;
+    if (goalType === '') {
+        goalType = 'personal_goal';
+    }
     let task = new TaskModel({
         goalType,
         goalName,

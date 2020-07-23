@@ -2,21 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
-    goalType: String,
-    goalName: String,
-    goalRepeatNo: Number,
-    goalPurpose: String,
-    goalIcon: String,
+    goalType: { type: String, default: 'personal_goal', trim: true},
+    goalName: { type: String, required: true },
+    goalRepeatNo: { type: Number, default: 1},
+    goalPurpose: { type: String, trim: true },
+    goalIcon: { type: String, default: 'tasklist_icon', trim: true },
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'user',
         required: true
     },
-    // user: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'user',
-    //     required: true,
-    // }
 },
     {
         timestamps: true
