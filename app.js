@@ -25,8 +25,6 @@ const app = express();
 const store = new MongoDBStore({
     uri: uri
 });
-
-
 // Setting up the templating engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -37,24 +35,21 @@ app.use(helmet());
 app.use(compression());
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-// Setup sessions and store them into your database using MongoDBStore
+
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,
-    cookie: {
-        maxAge: 3000,
-    }
 }));
-
+// Setup sessions and store them into your database using MongoDBStore
 app.use(csrf());
 app.use(flash());
 
 // Routing requests
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken(),
-        next();
+    next();
 });
 app.get('/', (req, res, next) => {
     res.render('index');

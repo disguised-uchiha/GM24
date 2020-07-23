@@ -7,7 +7,6 @@ const TaskModel = require('../models/task');
 exports.postloginToDashBoard = (req, res, next) => {
     const user_entered_email = req.body.email;
     const user_entered_pwd = req.body.pwd;
-
     //Fetching the user from database with the email they provided
     UserModel.findOne({ email: user_entered_email })
         .exec()
@@ -34,7 +33,8 @@ exports.postloginToDashBoard = (req, res, next) => {
                                 name: user.name,
                                 streak: 25,
                                 medals: 0,
-                                tasks: taskList
+                                tasks: taskList,
+                                csrfToken: req.csrfToken()
                             });
                         });
                     });
