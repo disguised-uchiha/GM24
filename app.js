@@ -27,7 +27,7 @@ const store = new MongoDBStore({
 });
 
 
-// Setting up the view engine for template literals
+// Setting up the templating engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
@@ -42,7 +42,10 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: store
+    store: store,
+    cookie: {
+        maxAge: 3000,
+    }
 }));
 
 app.use(csrf());

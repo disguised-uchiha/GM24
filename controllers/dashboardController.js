@@ -2,10 +2,13 @@ const bcrypt = require('bcrypt');
 
 //Models
 const UserModel = require('../models/users');
+const TaskModel = require('../models/task');
+const task = require('../models/task');
 
 exports.postloginToDashBoard = (req, res, next) => {
     const user_entered_email = req.body.email;
     const user_entered_pwd = req.body.pwd;
+
     //Fetching the user from database with the email they provided
     UserModel.findOne({ email: user_entered_email })
         .exec()
@@ -24,14 +27,17 @@ exports.postloginToDashBoard = (req, res, next) => {
                     return req.session.save(err => {
                         res.status(200).render('./dashboard/welcome', {
                             name: req.session.user.name,
+                            streak: 25,
+                            medals: 0,
+                            goalName: '7 minutes workout',
+                            goalRepeatNo: 2,
+                            goalIcon: 'thunder_icon.png'
                         });
                     });
                 }
                 else {
                     req.flash('error', 'Invalid Password');
                     res.redirect('/registration/email_login');
-                    // console.log('login went wrong on /dashboard/welcome middleware');
-                    // res.status(401).json({ message: "Auth failed" });
                 }
             });
         })
@@ -43,7 +49,19 @@ exports.postloginToDashBoard = (req, res, next) => {
 };
 
 exports.getloginToDashBoard = (req, res, next) => {
-    res.render('./dashboard/welcome', {
-        name: req.session.user.name,
+    const user = req.session.user;
+    let taskList;
+    var start = new Date();
+    start.setHours(0, 0, 0, 0);
+    var end = new Date();
+    end.setHours(23, 59, 59, 999);
+    TaskModel.find({ userId: user._id, "createdAt": { "$gte": start, "$lt": end }}).exec().then(user => {
+        taskList = user;
+        res.render('./dashboard/welcome', {
+            name: user.name,
+            streak: 25,
+            medals: 0,
+            tasks: taskList
+        });
     });
 };

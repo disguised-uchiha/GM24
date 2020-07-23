@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Goal paramater</title>
+    <!-- css links  -->
+    <link rel="stylesheet" href="/css/viewportfix.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/icons.css">
+    <title>Add Daily Goal</title>
+    <!-- scripts  -->
+    <script src="/js/viewportfix.js"></script>
+</head>
+
+<body>
+    <main class="p-3 my-element">
+        <!-- height 10 % -->
+        <section style="height: 10%; overflow: hidden;">
+            <div class="d-flex align-items-center">
+                <div class="p-1">
+                    <span class='main-logo'></span>
+                </div>
+                <div class="d-flex flex-column w-100 p-2">
+                    <div class="font-weight-bold">Add Daily Goal</div>
+                    <div>I'm ready for it</div>
+                </div>
+                <div class="ml-auto p-1"><span class="beard-logo"></span></div>
+            </div>
+        </section>
+
+        <!-- height: 85% total: 95%  -->
+        <section style="height: 85%; overflow: hidden;">
+            <form action="./save_task" class="h-100 container" method="POST">
+                <input type="hidden" name="goal_type" value="<%= goalType %>">
+                <div style="height: 10%;" class="d-flex flex-column justify-content-center">
+                    <div class="text-capitalize text-center ">2. Set the parameter</div>
+                </div>
+
+                <div style="height: 80%;">
+                    <div>
+                        <label for="task_name">Name of the Goal</label>
+                        <input type="text" name="task_name" class="form-control" placeholder="Task Name">
+                    </div>
+                    <div >
+                        <div>Number of Times per Day</div>
+                        
+                        <input type="radio" name="times_per_day" id="1" value="1">
+                        <label for="1">1</label>
+                        <input type="radio" name="times_per_day" id="2" value="2">
+                        <label for="2">2</label>
+                        <input type="radio" name="times_per_day" id="3" value="3">
+                        <label for="3">3</label>
+                        <input type="radio" name="times_per_day" id="4" value="4">
+                        <label for="4">4</label>
+                        <input type="radio" name="times_per_day" id="5" value="5">
+                        <label for="5">5</label>
+                        <input type="radio" name="times_per_day" id="6" value="6">
+                        <label for="6">6</label>
+                        <input type="radio" name="times_per_day" id="7" value="7">
+                        <label for="7">7</label>
+                        <input type="radio" name="times_per_day" id="8" value="8">
+                        <label for="8">8</label>
+                        <input type="radio" name="times_per_day" id="9" value="9">
+                        <label for="9">9</label>
+                    </div>
+                    <div>
+                        <label for="purpose">Purpose of Accomplishing the Goal</label>
+                        <textarea name="purpose" placeholder="Purpose" class="w-100 form-control"></textarea>
+                    </div>
+                    <div>
+                        <div>Select the Icon</div>
+                        <input type="radio" name="select_icon" id="task_icon" value="task_icon">
+                        <label for="task_icon" class="p-1">
+                            <img src="/icons/tasklist_icon.png" alt="thunder_icon" width="40px" height="40px">
+                        </label>
+                        <input type="radio" name="select_icon" id="client_icon" value="client_icon">
+                        <label for="client_icon"class="p-1">
+                            <img src="/icons/thunder_icon.png" alt="thunder_icon" width="40px" height="40px">
+                        </label>
+                        <input type="radio" name="select_icon" id="thunder_icon" value="thunder_icon">
+                        <label for="thunder_icon"class="p-1">
+                            <img src="/icons/thunder_icon.png" alt="thunder_icon" width="40px" height="40px">
+                        </label>
+                    </div>
+                </div>
+
+                <div style="height: 10%;" class="d-flex flex-column justify-content-center">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <input type="submit" value="Let's GO" class="btn btn-block btn-primary">
+                </div>
+            </form>
+        </section>
+
+        <!-- height:5% total:100%  -->
+        <section style="height: 5%;">
+            <div class="d-flex justify-content-center">
+                <p>GiftIcon</p>
+                <p> ||| </p>
+                <p>settings</p>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -4,55 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- css links  -->
+    <link rel="stylesheet" href="/css/viewportfix.css">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/welcome.css">
+    <link rel="stylesheet" href="/css/icons.css">
     <title>Welcome <%= name %></title>
+    <!-- scripts  -->
+    <script src="/js/viewportfix.js"></script>
 </head>
 
 <body>
-    <main class="d-flex flex-column">
-        <!-- Divided the dashboard into two block of 50-50 height  -->
-        <!-- section one with 50% height  -->
-        <section class="h-50 bg-success">
-            <!-- div for the + icon  -->
-            <div class="bg-danger d-flex justify-content-end p-3">
-                <form action="./logout" method="POST">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <input type="submit" value="Logout" class="input-group-btn">
+    <main class="d-flex flex-column container p-3 my-element" style="overflow: hidden">
+
+        <section style="height: 10%; overflow: hidden;">
+            <div class="d-flex">
+                <div class="p-1">
+                    <span class='main-logo'></span>
+                </div>
+                <div class="d-flex flex-column w-100 p-2">
+                    <div class="mb-0 font-weight-bold"><%= streak %> Days streak</div>
+                    <div class="mb-0"><%= medals %> Medals</div>
+                </div>
+                <p class="ml-auto p-1"><span class="beard-logo"></span></p>
+            </div>
+        </section>
+
+        <section style="height: 75%; overflow: scroll;">
+            <div class="d-flex mt-1 align-items-center">
+                <div class="p-2" style="max-width: 5em;"><img src="/icons/<%= goalIcon %>" alt="no" width="40px"
+                        height="40px"> </div>
+                <div class="d-flex flex-column w-100 p-2">
+                    <div><%= goalName %></div>
+                    <div>0/<%= goalRepeatNo %></div>
+                </div>
+                <form action="/update_task" class="d-inline">
+                    <button type="submit" class="btn"><span class="add-icon"></span></button>
                 </form>
             </div>
-            <!-- div for the content  -->
-            <div class="d-flex justify-content-center align-items-center h-50 bg-secondary">
-                <!-- name and week-list in a block  -->
-                <div class="d-flex flex-column">
-                    <div class="bg-white p-2">Name of the Habit</div>
-                    <div class="bg-primary p-2">
-                        <ul class="d-flex justify-content-between">
-                            <li>S</li>
-                            <li>M</li>
-                            <li>T</li>
-                            <li>W</li>
-                            <li>T</li>
-                            <li>F</li>
-                            <li>S</li>
-                        </ul>
-                    </div>
-                </div>
+        </section>
+
+        <!-- The main button  -->
+        <section class="d-flex flex-column justify-content-center" style="height: 10%; overflow: hidden;">
+            <form action="./add_daily_goal_1" class="text-center" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="submit" value="Add Daily Goal" class="btn btn-info btn-block rounded-0">
+            </form>
+        </section>
+
+        <!-- Botton navigation bar is here  -->
+        <section style="height: 5%;">
+            <div class="d-flex justify-content-center">
+                <div>GiftIcon</div>
+                <div>|||</div>
+                <div>settings</div>
             </div>
         </section>
-        <!-- section two with 50% height -->
-        <section class="h-50 bg-warning d-flex flex-column justify-content-end">
-            <div class="d-flex justify-content-center bg-success m-0">
-                <ul class="d-flex justify-content-around w-75 bg-warning">
-                    <li><a href="./create_habit">Create_Habit</a></li>
-                    <li><a href="./rpd">RPD</a></li>
-                    <li>Icon3</li>
-                </ul>
-            </div>
-        </section>
+
     </main>
 </body>
 

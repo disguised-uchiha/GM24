@@ -4,21 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- css links  -->
+    <link rel="stylesheet" href="/css/viewportfix.css">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="/css/email_login.css">
+    <link rel="stylesheet" href="/css/icons.css">
+    <link rel="stylesheet" href="/css/cstbutton.css">
+    <!-- scripts  -->
+    <script src="/js/viewportfix.js"></script>
+    <title>LogIn</title>
 </head>
 
 <body>
-    <main class="d-flex flex-column justify-content-end align-items-center">
+    <main class="d-flex my-element flex-column justify-content-end align-items-center">
         <% if(errorMessage) { %>
         <div class="bg-danger text-white rounded w-25 p-2 text-center mx-auto"><%= errorMessage %></div>
         <% } %>
-        <ul class="w-50">
-            <li class="d-block mb-3 p-0">
+        <ul class="w-75">
+            <li class="mb-3 p-0">
                 <form action="/dashboard/welcome" method="POST">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <input type="email" class="form-control mb-3" name="email" placeholder="Enter your Email">
@@ -26,8 +29,8 @@
                     <input type="submit" class="btn btn-warning w-100" value="Login">
                 </form>
             </li>
-            <li class="btn btn-danger d-block mb-3"><a href="/reset_password">Reset Password</a></li>
-            <li class="btn btn-danger d-block mb-3"><a href="/registration/email_signup">SignUp</a></li>
+            <li class="btn btn-danger btn-block mb-3"><a href="/reset_password">Reset Password</a></li>
+            <li class="btn btn-orange btn-block mb-3"><a href="/registration/email_signup">SignUp</a></li>
         </ul>
     </main>
 </body>

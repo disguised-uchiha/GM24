@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -15,8 +16,23 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    resetToken: String, 
+    resetToken: String,
     resetTokenExpiration: Date,
-});
-
-module.exports = mongoose.model('User', userSchema);
+},
+    // {
+    //     toJSON: {
+    //         virtuals: true,
+    //     },
+    //     toObject: {
+    //         virtuals: true,
+    //     },
+    //     timestamps: true
+    // }
+);
+// userSchema.virtual('tasks', {
+//     ref: 'task',
+//     localField: '_id',
+//     foreignField: 'user',
+//     justOne: false,
+// });
+module.exports = mongoose.model('user', userSchema);

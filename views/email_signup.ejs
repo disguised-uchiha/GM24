@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/bootstrap.css">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="/css/email_login.css">
+    <!-- <link rel="stylesheet" href="/css/email_login.css"> -->
 </head>
 
 <body>
-    <main class="d-flex flex-column justify-content-end align-items-center">
-        <ul class="w-50">
-            <li class="d-block mb-3 p-0">
+    <main class="d-flex my-element flex-column justify-content-end align-items-center">
+        <ul class="w-75">
+            <li class="mb-3 p-0">
                 <form action="/registration/signup_processing" method="POST">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <input type="text" class="form-control mb-3" name="name" placeholder="Your Name">
