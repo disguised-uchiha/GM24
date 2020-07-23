@@ -69,14 +69,14 @@ exports.postReset = (req, res, next) => {
             }).then(result => {
                 req.flash('feedback', 'Reset Link sent to your email');
                 res.redirect('/reset_password');
-                // TODO: Update forget password href to newlink
+                // TODO: Update forget password href to the domain you selected to host
                 return transporter.sendMail({
                     to: req.body.email,
                     from: 'harsh.boricha2015@gmail.com',
                     subject: 'Password Reset link for GM24',
                     html: `
                         <p>You requested a password reset </p>
-                        <p> Click this <a href="https://god-mode-24.herokuapp.com/reset/${token}">link</a> to set a new password </p>
+                        <p> Click this <a href="./reset/${token}">link</a> to set a new password </p>
                     `
                 });
             })

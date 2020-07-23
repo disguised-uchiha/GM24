@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 //Models
 const UserModel = require('../models/users');
 const TaskModel = require('../models/task');
-const task = require('../models/task');
 
 exports.postloginToDashBoard = (req, res, next) => {
     const user_entered_email = req.body.email;
@@ -24,14 +23,19 @@ exports.postloginToDashBoard = (req, res, next) => {
                 if (doMatch) {
                     req.session.isLoggedIn = true;
                     req.session.user = user;
+                    let start = new Date();
+                    start.setHours(0, 0, 0, 0);
+                    let end = new Date();
+                    end.setHours(23, 59, 59, 999);                
                     return req.session.save(err => {
-                        res.status(200).render('./dashboard/welcome', {
-                            name: req.session.user.name,
-                            streak: 25,
-                            medals: 0,
-                            goalName: '7 minutes workout',
-                            goalRepeatNo: 2,
-                            goalIcon: 'thunder_icon.png'
+                        TaskModel.find({ userId: user._id, "createdAt": { "$gte": start, "$lt": end }}).exec().then(user => {
+                            taskList = user;
+                            res.status(200).render('./dashboard/welcome', {
+                                name: user.name,
+                                streak: 25,
+                                medals: 0,
+                                tasks: taskList
+                            });
                         });
                     });
                 }
@@ -51,9 +55,9 @@ exports.postloginToDashBoard = (req, res, next) => {
 exports.getloginToDashBoard = (req, res, next) => {
     const user = req.session.user;
     let taskList;
-    var start = new Date();
+    let start = new Date();
     start.setHours(0, 0, 0, 0);
-    var end = new Date();
+    let end = new Date();
     end.setHours(23, 59, 59, 999);
     TaskModel.find({ userId: user._id, "createdAt": { "$gte": start, "$lt": end }}).exec().then(user => {
         taskList = user;
