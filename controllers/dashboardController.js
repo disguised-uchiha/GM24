@@ -25,14 +25,14 @@ exports.postloginToDashBoard = (req, res, next) => {
                     let start = new Date();
                     start.setHours(0, 0, 0, 0);
                     let end = new Date();
-                    end.setHours(23, 59, 59, 999);                
+                    end.setHours(23, 59, 59, 999);
                     return req.session.save(err => {
-                        TaskModel.find({ userId: user._id, "createdAt": { "$gte": start, "$lt": end }}).exec().then(user => {
+                        TaskModel.find({ userId: user._id, "createdAt": { "$gte": start, "$lt": end } }).exec().then(user => {
                             taskList = user;
                             res.status(200).render('./dashboard/welcome', {
                                 name: user.name,
-                                streak: 25,
-                                medals: 0,
+                                streak: user.streak,
+                                medals: user.medals,
                                 tasks: taskList,
                                 csrfToken: req.csrfToken()
                             });
@@ -59,12 +59,12 @@ exports.getloginToDashBoard = (req, res, next) => {
     start.setHours(0, 0, 0, 0);
     let end = new Date();
     end.setHours(23, 59, 59, 999);
-    TaskModel.find({ userId: user._id, "createdAt": { "$gte": start, "$lt": end }}).exec().then(user => {
+    TaskModel.find({ userId: user._id, "createdAt": { "$gte": start, "$lt": end } }).exec().then(user => {
         taskList = user;
         res.render('./dashboard/welcome', {
             name: user.name,
-            streak: 25,
-            medals: 0,
+            streak: user.streak,
+            medals: user.medals,
             tasks: taskList
         });
     });

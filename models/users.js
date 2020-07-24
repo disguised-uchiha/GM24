@@ -16,23 +16,11 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    streak: { type: Number, default: 0 },
+    medals: { type: Number, default: 0 },
+    status: { type: String, default: 'Mortal' },
     resetToken: String,
     resetTokenExpiration: Date,
-},
-    // {
-    //     toJSON: {
-    //         virtuals: true,
-    //     },
-    //     toObject: {
-    //         virtuals: true,
-    //     },
-    //     timestamps: true
-    // }
-);
-// userSchema.virtual('tasks', {
-//     ref: 'task',
-//     localField: '_id',
-//     foreignField: 'user',
-//     justOne: false,
-// });
+});
+
 module.exports = mongoose.model('user', userSchema);
