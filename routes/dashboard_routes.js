@@ -27,6 +27,7 @@ router.post('/dashboard/add_daily_goal_2', isAuth, (req, res, next) => {
     });
 });
 
+// save task to DB and redirect to dashboard.
 router.post('/dashboard/save_task', (req, res, next) => {
     const user = req.session.user;
     // Destructuring the data into variables with same name as that defined in schema
@@ -45,6 +46,19 @@ router.post('/dashboard/save_task', (req, res, next) => {
     task.save();
     res.redirect('/dashboard/welcome');
 });
+
+router.get('/task/:taskId', (req, res, next) => {
+    const taskId = req.params.taskId;
+    TaskModel.findById(taskId).then(task => {
+        res.render('./dashboard/task_detail', {
+            taskName: task.goalName,
+            taskType: task.goalType,
+            taskIcon: task.goalIcon,
+            taskPurpose: task.goalPurpose
+        });
+    })
+    // res.redirect('/dashboard/welcome');
+})
 
 // router.post('/dashboard/logout', (req, res, next) => {
 //     req.session.destroy(err => {

@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    cookie: { maxAge: 360000*2 },//expires in 2 days
+    cookie: { maxAge: 3600000*24*2 },//expires in 2 days
     resave: false,
     saveUninitialized: false,
     store: store,

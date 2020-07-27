@@ -33,15 +33,15 @@
         <section style="height: 75%; overflow: scroll;">
             <form action="/update_task" class="d-inline">
             <% for(let task of tasks) { %>
-            <div class="d-flex mt-1 align-items-center" style="overflow-y: scroll;">
-                    <div class="p-2" style="max-width: 5em;"><img src="/icons/<%= task.goalIcon %>.png" alt="no" width="40px"
+            <a href="/task/<%= task._id %>" class="d-flex mt-1 align-items-center bg-danger btn p-0 m-0 rounded-0" style="overflow-y: scroll;">
+                    <div class="p-2 bg-warning" style="max-width: 5em;"><img src="/icons/<%= task.goalIcon %>.png" alt="no" width="40px"
                             height="40px"> </div>
-                    <div class="d-flex flex-column w-100 p-2">
+                    <div class="d-flex bg-info flex-column align-items-start w-100 p-2">
                         <div><%= task.goalName %></div>
                         <div>0/<%= task.goalRepeatNo %></div>
                     </div>
-                    <button type="submit" class="btn"><span class="add-icon"></span></button>
-                </div>
+                    <button type="submit" class="btn bg-warning"><span class="add-icon"></span></button>
+                </a>
                 <% } %>
             </form>
         </section>
