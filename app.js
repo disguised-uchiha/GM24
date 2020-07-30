@@ -10,7 +10,7 @@ const csrf = require('csurf');
 const flash = require('connect-flash');
 const helmet = require('helmet');
 const compression = require('compression');
-
+const ms = require('ms');
 // Routes
 const reg_routes = require('./routes/registration_routes');
 const dashboard_routes = require('./routes/dashboard_routes');
@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    cookie: { maxAge: 3600000*24*2 },//expires in 2 days
+    cookie: { maxAge: ms('2 days') },//expires in 2 days
     resave: false,
     saveUninitialized: false,
     store: store,
@@ -50,7 +50,7 @@ app.use(flash());
 // Routing requests
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken(),
-    next();
+        next();
 });
 app.get('/', (req, res, next) => {
     res.render('index');

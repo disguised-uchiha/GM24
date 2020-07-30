@@ -32,6 +32,7 @@ router.post('/dashboard/save_task', (req, res, next) => {
     const user = req.session.user;
     // Destructuring the data into variables with same name as that defined in schema
     let { goal_type: goalType, task_name: goalName, purpose: goalPurpose, select_icon: goalIcon, times_per_day: goalRepeatNo } = req.body;
+    // Imp coz goalType in models given as default will not work since the value itself is ''.
     if (goalType === '') {
         goalType = 'personal_goal';
     }
@@ -51,14 +52,15 @@ router.get('/task/:taskId', (req, res, next) => {
     const taskId = req.params.taskId;
     TaskModel.findById(taskId).then(task => {
         res.render('./dashboard/task_detail', {
+            taskId: task.id,
             taskName: task.goalName,
             taskType: task.goalType,
             taskIcon: task.goalIcon,
-            taskPurpose: task.goalPurpose
+            taskPurpose: task.goalPurpose,
+            taskRepetition: task.goalRepeatNo,
         });
-    })
-    // res.redirect('/dashboard/welcome');
-})
+    }).catch(err => console.log(err))
+});
 
 // router.post('/dashboard/logout', (req, res, next) => {
 //     req.session.destroy(err => {

@@ -16,13 +16,44 @@
 </head>
 
 <body>
-    <main class="bg-white w-100">
-        <section class="d-flex justify-content-between">
-            <div class="p-5 bg-warning d-flex justify-content-center align-items-center task-icon-container"><img src="/icons/<%= taskIcon %>.png" alt="no" width="60px"
-                    height="60px" class="task-icon"></div>
-        </section>
-    </main>
+    <main class="bg-white my-element p-2 w-100">
 
+        <!-- height 20%, total: 20% -->
+        <section class="d-flex bg-info justify-content-between align-items-center"
+            style="height: 20%; overflow: hidden;">
+            <div class="p-5 bg-warning d-flex justify-content-center align-items-center task-icon-container"><img
+                    src="/icons/<%= taskIcon %>.png" alt="<%= taskIcon %> Image" width="60px" height="60px"
+                    class="task-icon"></div>
+            <div class="mr-3 card p-2">0/<%= taskRepetition %></div>
+        </section>
+        <% let editedTaskType = taskType.split("_").join(" ") %>
+        <!-- height: 65%, total: 90% -->
+        <section class="d-flex bg-danger flex-column align-items-center" style="height: 65%; overflow: scroll;">
+            <div class="p-2 bg-warning" style="font-size: 1.5rem;"><%= taskName %></div>
+            <div class="p-2 bg-warning"><i>TASK TYPE</i>: <%= editedTaskType %></div>
+            <div class="p-2 bg-warning w-100"><%= taskPurpose %></div>
+        </section>
+
+        <!-- The main button  -->
+        <section class="d-flex align-items-center justify-content-center" style="height: 10%; overflow: hidden;">
+            <a href="/edit/<%= taskId %>" class="btn btn-primary">Edit</a>
+            <a href="/delete/<%= taskId %>" class="btn btn-danger ml-4">Delete</a>
+            <!-- <form action="./add_daily_goal_1" class="text-center" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="submit" value="Add Daily Goal" class="btn btn-info btn-block rounded-0">
+            </form> -->
+        </section>
+
+        <!-- Botton navigation bar is here  -->
+        <section style="height: 5%; overflow: hidden;">
+            <div class="d-flex justify-content-center bg-secondary">
+                <div>GiftIcon</div>
+                <div>|||</div>
+                <div>settings</div>
+            </div>
+        </section>
+
+    </main>
 </body>
 
 </html>
