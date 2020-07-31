@@ -11,6 +11,7 @@ const flash = require('connect-flash');
 const helmet = require('helmet');
 const compression = require('compression');
 const ms = require('ms');
+
 // Routes
 const reg_routes = require('./routes/registration_routes');
 const dashboard_routes = require('./routes/dashboard_routes');
